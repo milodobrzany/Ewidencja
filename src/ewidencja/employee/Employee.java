@@ -54,9 +54,9 @@ public class Employee {
         return schedule;
     }*/
 
-    /*public Report getReport() {
+    public Report getReport() {
         return report;
-    }*/
+    }
 
     /*public void add_absence(Absence absence){
 
