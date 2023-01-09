@@ -8,6 +8,7 @@ public class Presence {
     private String day;
     private String arrival_time;
     private String leave_time;
+    private int id;
 
     public Presence(){
         presence = false;
@@ -47,6 +48,9 @@ public class Presence {
         this.day = java.time.LocalDate.now().toString();
     }
 
+    public void setId(int id){
+        this.id = id;
+    }
     public void setDay(String day) {
         this.day = day;
     }
