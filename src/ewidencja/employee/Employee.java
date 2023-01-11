@@ -3,7 +3,10 @@ package ewidencja.employee;
 import ewidencja.activity.Absence;
 import ewidencja.entry.Report;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String name;
     private String surname;
     private String username;
@@ -15,7 +18,9 @@ public class Employee {
     private Absence absences;
 
     public Employee (String name, String surname){
-
+        this.name = name;
+        this.surname = surname;
+        report = new Report();
     }
 
     public void setName(String name) {
@@ -41,7 +46,9 @@ public class Employee {
     public void setHierarchy_type(String hierarchy_type) {
         this.hierarchy_type = hierarchy_type;
     }
-
+    public String getName() {
+        return name;
+    }
     public String getUsername() {
         return username;
     }

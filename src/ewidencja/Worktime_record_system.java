@@ -2,26 +2,34 @@ package ewidencja;
 
 import ewidencja.activity.Presence;
 import ewidencja.employee.Employee;
+import ewidencja.ObjectIO;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Worktime_record_system {
-    private Employee employee;
+    private static Employee employee;
     private LoginScreen login_screen;
 
     public Worktime_record_system(){}
 
     public static void main(String[] args) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Date date = new Date();
-        System.out.println(formatter.format(date));
-        System.out.println(java.time.LocalDate.now());
-        String data = java.time.LocalTime.now().toString();
-        System.out.println(data);
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//        Date date = new Date();
+//        System.out.println(formatter.format(date));
+//        System.out.println(java.time.LocalDate.now());
+//        String data = java.time.LocalTime.now().toString();
+//        System.out.println(data);
+        ObjectIO objectIO = new ObjectIO();
+//        employee = new Employee("Michal", "Sikacki");
+//        objectIO.WriteObjectToFile(employee);
+        employee = (Employee) objectIO.ReadObjectFromFile();
+        System.out.println(employee.getName());
+        employee.getReport().generate_report();
     }
 
-    public void wrs_login(){}
+    public void wrs_login(){
+    }
 
     public void wrs_confirm_presence(String username, String password){
         Presence presence = new Presence();
