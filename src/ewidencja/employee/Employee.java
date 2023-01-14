@@ -24,6 +24,7 @@ public class Employee implements Serializable {
         this.name = name;
         this.surname = surname;
         report = new Report();
+        schedule = new Schedule();
     }
 
     public void setName(String name) {
@@ -63,16 +64,12 @@ public class Employee implements Serializable {
         return password;
     }
 
-    /*public Schedule getSchedule() {
+    public Schedule getSchedule() {
         return schedule;
-    }*/
+    }
 
     public Report getReport() {
         return report;
     }
-
-    /*public void add_absence(Absence absence){
-
-    }*/
 
 }

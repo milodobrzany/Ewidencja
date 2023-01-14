@@ -1,7 +1,11 @@
 package ewidencja;
 
+import ewidencja.activity.Absence;
+import ewidencja.activity.Leave;
 import ewidencja.activity.Presence;
 import ewidencja.employee.Employee;
+
+import java.text.ParseException;
 import java.util.Scanner;
 import ewidencja.ObjectIO;
 import ewidencja.employee.Manager;
@@ -22,15 +26,15 @@ public class Worktime_record_system {
         login_screen = new LoginScreen();
         ObjectIO objectIO = new ObjectIO();
 
-//        employee = new Employee("Michal", "Sikacki");
-//        employee.setUsername("mic609");
-//        employee.setPassword("samsunek");
-//        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
+        employee = new Employee("Michal", "Sikacki");
+        employee.setUsername("mic609");
+        employee.setPassword("samsunek");
+        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
 
         Manager manager= new Manager();
         wrs_login(manager);
 
-//        employee= (Employee) objectIO.ReadObjectFromFile("Michal", "Sikacki"); // testowe logowanie
+        employee= (Employee) objectIO.ReadObjectFromFile("Michal", "Sikacki"); // testowe logowanie
         presence = new Presence();
 
         while(true){
@@ -39,6 +43,7 @@ public class Worktime_record_system {
             System.out.println("Wybierz opcje: ");
             System.out.println("2. Potwierdz obecnosc: ");
             System.out.println("4. Wygeneruj raport: ");
+            System.out.println("5. Dodaj urlop: ");
             Scanner scan = new Scanner(System.in);
             String employeeInput = scan.nextLine();
 
@@ -48,6 +53,9 @@ public class Worktime_record_system {
                     break;
                 case "4":
                     wrs_generate_report();
+                    break;
+                case "5":
+                    wrs_leave_request();
             }
         }
     }
@@ -75,9 +83,41 @@ public class Worktime_record_system {
         employee.getReport().generate_report();
     }
     public void wrs_show_entry_details(int id){}
-    public void wrs_leave_request(){}
-    public void wrs_set_start_end_date(String start_date, String end_date){}
-    public int wrs_left_vacation_days(){return 1;}
+    public static void wrs_leave_request(){
+        Absence absence = new Leave();
+        wrs_set_start_end_date(absence);
+        absence.create_absence(employee);
+    }
+    public static void wrs_set_start_end_date(Absence absence){
+        long left_days;
+        int userInput;
+        do{
+            Scanner scan = new Scanner(System.in);
+            boolean formatOK = true;
+
+            System.out.println("------------------------------------------------");
+            absence.setStart_date();
+            absence.setEnd_date();
+            String st = absence.getStart_date();
+            String en = absence.getEnd_date();
+
+            left_days = wrs_left_vacation_days(st, en, absence);
+            userInput = employee.getSchedule().getLeft_vacation_days();
+
+            if(userInput == 0){
+                System.out.println("Informacja nie zostala znaleziona w systemie lub brak dostępnych dni urlopowych");
+                return;
+            }
+
+            if(left_days > userInput){
+                System.out.println("Wprowadzony urlop nie moze zostac dodany, jego dlugosc jest wieksza niz liczba pozostalych" +
+                        " dni urlopowych!");
+            }
+        }while(left_days > userInput);
+    }
+    public static long wrs_left_vacation_days(String start, String end, Absence absence){
+        return absence.left_vacation_days(start, end);
+    }
     public void wrs_business_trip_request(){}
     public void wrs_sick_leave_request(){}
     public void wrs_add_employee(){}

@@ -1,22 +1,46 @@
 package ewidencja.activity;
 
-public class Leave {
-    private boolean isConfirmed;
-    private String start_date;
-    private String end_date;
+import ewidencja.employee.Employee;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Leave extends Absence implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     public Leave(){}
-    public void create_absence(){}
 
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
+    @Override
+    public void create_absence(Employee employee){
+        super.create_absence(employee);
     }
 
-    public void setEnd_date(String end_date) {
-        this.end_date = end_date;
+    @Override
+    public void setStart_date() {
+        super.setStart_date();
     }
 
-    private boolean left_vacation_days(int days_left){return true;}
-    public boolean process_subordinate_absence(){return true;}
+    @Override
+    public void setEnd_date() {
+        super.setEnd_date();
+    }
 
+    public long left_vacation_days(String start, String end){
+        return super.left_vacation_days(start, end);
+    }
+
+    @Override
+    public boolean process_subordinate_absence(){
+        return super.process_subordinate_absence();
+    }
+
+    @Override
+    public void showAbsence() {
+        super.showAbsence();
+    }
 }

@@ -1,6 +1,8 @@
 package ewidencja.activity;
 
-public class Delegation {
+import ewidencja.employee.Employee;
+
+public class Delegation extends Absence{
      private String delegation_type;
      private String name;
      private String goal;
@@ -11,17 +13,30 @@ public class Delegation {
      private boolean isConfirmed;
 
      public Delegation(){}
-     public void create_absence(){}
-     public boolean process_subordinate_absence(){return true;}
 
-     public void setIsConfirmed(boolean isConfirmed) {}
-
-     public void setStart_date(String start_date) {
-          this.start_date = start_date;
+     @Override
+     public void create_absence(Employee employee){
+          super.create_absence(employee);
      }
 
-     public void setEnd_date(String end_date) {
-          this.end_date = end_date;
+     @Override
+     public boolean process_subordinate_absence(){
+          return super.process_subordinate_absence();
+     }
+
+     @Override
+     public void setIsConfirmed(boolean isConfirmed) {
+          super.setIsConfirmed(isConfirmed);
+     }
+
+     @Override
+     public void setStart_date() {
+          super.setStart_date();
+     }
+
+     @Override
+     public void setEnd_date() {
+          super.setEnd_date();
      }
 
      public void setName(String name) {
@@ -40,5 +55,8 @@ public class Delegation {
           this.transport_form = transport_form;
      }
 
-     public void show_delegation(){}
+     @Override
+     public void showAbsence() {
+          super.showAbsence();
+     }
 }

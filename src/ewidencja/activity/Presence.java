@@ -30,6 +30,7 @@ public class Presence implements iPresence, Serializable {
             setLeave_time();
             objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
             presenceFinished = true;
+            System.out.println("Zaktualizowano obecnosc!\n");
         } else {
 
             setDay();

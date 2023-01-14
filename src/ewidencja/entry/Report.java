@@ -25,10 +25,16 @@ public class Report implements Serializable {
     }
     public void generate_report(){
         for(Presence presenceEntry: presences){
+
+            System.out.println("OBECNOSC");
             System.out.println("Id: " + presenceEntry.getId());
             System.out.println("Dzien: " + presenceEntry.getDay());
             System.out.println("Godzina rozpoczecia: " + presenceEntry.getArrival_time());
             System.out.println("Godzina zakonczenia: " + presenceEntry.getLeave_time());
+            System.out.println("\n");
+        }
+        for(Absence absenceEntry: absences){
+            absenceEntry.showAbsence();
             System.out.println("\n");
         }
     }

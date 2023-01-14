@@ -1,23 +1,39 @@
 package ewidencja.activity;
 
-public class Sick_leave {
-    private boolean isConfirmed;
-    private String start_date;
-    private String end_date;
+import ewidencja.employee.Employee;
 
-    public Sick_leave(){}
-    public void create_absence(){}
+public class Sick_leave extends Absence{
+    public Sick_leave(){
 
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
     }
 
-    public void setEnd_date(String end_date) {
-        this.end_date = end_date;
+    @Override
+    public void create_absence(Employee employee){
+        super.create_absence(employee);
     }
 
-    public void setIsConfirmed(boolean isConfirmed) {}
+    @Override
+    public void setStart_date() {
+        super.setStart_date();
+    }
 
-    public boolean process_subordinate_absence(){return true;}
+    @Override
+    public void setEnd_date() {
+        super.setEnd_date();
+    }
 
+    @Override
+    public void setIsConfirmed(boolean isConfirmed) {
+        super.setIsConfirmed(isConfirmed);
+    }
+
+    @Override
+    public boolean process_subordinate_absence(){
+        return super.process_subordinate_absence();
+    }
+
+    @Override
+    public void showAbsence() {
+        super.showAbsence();
+    }
 }
