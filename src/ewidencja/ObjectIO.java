@@ -1,17 +1,20 @@
 package ewidencja;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import ewidencja.employee.Employee;
+
+import java.io.*;
+import java.util.List;
 
 public class ObjectIO {
-    private static final String filepath="D:\\studia\\io\\Ewidencja\\objects\\pracownik";
-    public void WriteObjectToFile(Object serObj) {
+    private static final String filepath= System.getProperty("user.dir") + "\\employees\\";
+    File directoryPath = new File(filepath);
+    File filesList[] = directoryPath.listFiles();
+
+    public void WriteObjectToFile(Object serObj, String name, String surname) {
 
         try {
 
-            FileOutputStream fileOut = new FileOutputStream("pracownik.dat");
+            FileOutputStream fileOut = new FileOutputStream(filepath + name + "_" + surname + ".dat");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(serObj);
             objectOut.close();
@@ -22,11 +25,11 @@ public class ObjectIO {
         }
     }
 
-    public Object ReadObjectFromFile() {
+    public Object ReadObjectFromFile(String name, String surname) {
 
         try {
 
-            FileInputStream fileIn = new FileInputStream("pracownik.dat");
+            FileInputStream fileIn = new FileInputStream(filepath + name + "_" + surname + ".dat");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             Object obj = objectIn.readObject();
@@ -38,6 +41,32 @@ public class ObjectIO {
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    private Object ReadObjectFromFile(File fileEntry) {
+
+        try {
+
+            FileInputStream fileIn = new FileInputStream(fileEntry);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+
+            Object obj = objectIn.readObject();
+
+            System.out.println("The Object has been read from the file");
+            objectIn.close();
+            return obj;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public void listFilesForFolder(List<Employee> employees) {
+        for (File fileEntry : filesList) {
+            Employee employee = (Employee) this.ReadObjectFromFile(fileEntry);
+            employees.add(employee);
         }
     }
 }

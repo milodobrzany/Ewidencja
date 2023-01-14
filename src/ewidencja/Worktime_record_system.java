@@ -3,6 +3,7 @@ package ewidencja;
 import ewidencja.activity.Presence;
 import ewidencja.employee.Employee;
 import ewidencja.ObjectIO;
+import ewidencja.employee.Manager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,12 +21,29 @@ public class Worktime_record_system {
 //        System.out.println(java.time.LocalDate.now());
 //        String data = java.time.LocalTime.now().toString();
 //        System.out.println(data);
-        ObjectIO objectIO = new ObjectIO();
-//        employee = new Employee("Michal", "Sikacki");
-//        objectIO.WriteObjectToFile(employee);
-        employee = (Employee) objectIO.ReadObjectFromFile();
-        System.out.println(employee.getName());
-        employee.getReport().generate_report();
+
+//        ObjectIO objectIO = new ObjectIO();
+//        employee = new Employee("Jan", "Kowalski");
+//        employee.setPassword("samsunek");
+//        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());'
+
+//        employee = (Employee) objectIO.ReadObjectFromFile("Jan", "Kowalski");
+//        System.out.println(employee.getName());
+//        employee.getReport().generate_report();
+
+//        employee.setPassword("kamil");
+//        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
+//        System.out.println(employee.getPassword());
+//        employee.getReport().generate_report();
+
+//        Manager manager= new Manager();
+//        employee = manager.getEmployees().get(0);
+//        System.out.println(employee.getName());
+//        employee.getReport().generate_report();
+//        employee = manager.getEmployees().get(1);
+//        System.out.println(employee.getName());
+//        employee = manager.getEmployees().get(2);
+//        System.out.println(employee.getName());
     }
 
     public void wrs_login(){

@@ -1,12 +1,20 @@
 package ewidencja.employee;
 
-import java.util.List;
+import ewidencja.ObjectIO;
+
+import java.util.*;
 
 public class Manager {
     List<Employee> employees;
 
-    public Employee getEmployees(){
-        return (Employee) employees;
+    public Manager(){
+        ObjectIO ObjectIO = new ObjectIO();
+        employees = new ArrayList<>();
+        ObjectIO.listFilesForFolder(employees);
+    }
+
+    public List<Employee> getEmployees(){
+        return employees;
     }
 
     public void add_employee(){

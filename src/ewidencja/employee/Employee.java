@@ -49,6 +49,9 @@ public class Employee implements Serializable {
     public String getName() {
         return name;
     }
+    public String getSurname() {
+        return surname;
+    }
     public String getUsername() {
         return username;
     }
