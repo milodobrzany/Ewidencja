@@ -3,12 +3,17 @@ package ewidencja.activity;
 import ewidencja.ObjectIO;
 import ewidencja.employee.Employee;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public abstract class Absence implements iAbsence{
+public abstract class Absence implements iAbsence, Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     protected String absenceType;
     protected boolean isConfirmed;
 

@@ -26,15 +26,15 @@ public class Worktime_record_system {
         login_screen = new LoginScreen();
         ObjectIO objectIO = new ObjectIO();
 
-        employee = new Employee("Michal", "Sikacki");
-        employee.setUsername("mic609");
-        employee.setPassword("samsunek");
-        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
+//        employee = new Employee("Michal", "Sikacki");
+//        employee.setUsername("student");
+//        employee.setPassword("debil");
+//        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
 
         Manager manager= new Manager();
         wrs_login(manager);
 
-        employee= (Employee) objectIO.ReadObjectFromFile("Michal", "Sikacki"); // testowe logowanie
+//        employee= (Employee) objectIO.ReadObjectFromFile("Michal", "Sikacki"); // testowe logowanie
         presence = new Presence();
 
         while(true){
