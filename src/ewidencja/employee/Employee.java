@@ -3,10 +3,13 @@ package ewidencja.employee;
 import ewidencja.activity.Absence;
 import ewidencja.entry.Report;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Employee implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
+
     private String name;
     private String surname;
     private String username;

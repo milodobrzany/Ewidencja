@@ -1,5 +1,7 @@
 package ewidencja;
 
+import ewidencja.employee.Manager;
+
 public interface iLoginScreen {
-    void login(String username, String password);
+    void login(Manager manager);
 }

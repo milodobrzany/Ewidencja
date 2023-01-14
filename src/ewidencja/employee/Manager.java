@@ -1,10 +1,9 @@
 package ewidencja.employee;
 
 import ewidencja.ObjectIO;
-
 import java.util.*;
 
-public class Manager {
+public class Manager implements iManager{
     List<Employee> employees;
 
     public Manager(){
@@ -17,21 +16,23 @@ public class Manager {
         return employees;
     }
 
+    @Override
     public void add_employee(){
 
     }
 
+    @Override
     public void remove_employee(){
 
     }
 
+    @Override
     public void set_personal_data(){
 
     }
 
-/*    public Employee choose_employee(String name, String surname){
-
+    @Override
+    public Employee choose_employee(String name, String surname) {
+        return null;
     }
-
- */
 }
