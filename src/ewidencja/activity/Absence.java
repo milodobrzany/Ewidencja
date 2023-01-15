@@ -132,4 +132,7 @@ public abstract class Absence implements iAbsence, Serializable {
 
         return 1000000;
     }
+    public int getId(){
+        return id;
+    }
 }

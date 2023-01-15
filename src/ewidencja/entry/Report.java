@@ -50,4 +50,16 @@ public class Report implements Serializable {
         absence.setId(absenceCounter);
         absenceCounter += 1;
     }
+    public Absence choose_absence(int id){
+        for(Absence absenceEntry: absences){
+            if(absenceEntry.getId() == id)
+                return absenceEntry;
+        }
+        System.out.println("Podany wniosek nie istnieje w systemie!");
+        return null;
+    }
+    public void deleteAbsence(int id){
+        absences.remove(id - 1);
+        absenceCounter--;
+    }
 }

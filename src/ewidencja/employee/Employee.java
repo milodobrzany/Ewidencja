@@ -59,6 +59,9 @@ public class Employee implements Serializable {
     public String getUsername() {
         return username;
     }
+    public String getHierarchy_type() {
+        return hierarchy_type;
+    }
 
     public String getPassword() {
         return password;
