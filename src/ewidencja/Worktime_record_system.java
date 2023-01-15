@@ -47,25 +47,35 @@ public class Worktime_record_system {
             System.out.println("------------------------------------------------");
             System.out.println(employee.getName() + " " + employee.getSurname());
             System.out.println("Wybierz opcje: ");
-            System.out.println("2. Potwierdz obecnosc: ");
-            System.out.println("4. Wygeneruj raport: ");
-            System.out.println("5. Dodaj urlop: ");
-            System.out.println("9. Rozpatrz wniosek: ");
-            System.out.println("10. Dodaj pracownika: ");
+            System.out.println("1. Potwierdz obecnosc: ");
+            System.out.println("2. Wygeneruj raport: ");
+            System.out.println("3. Dodaj urlop: ");
+            System.out.println("4. Potwierdz obecnosc pracownika: ");
+            System.out.println("5. Rozpatrz wniosek: ");
+            System.out.println("6. Dodaj pracownika: ");
+            System.out.println("7. Wyjdz z programu: ");
             Scanner scan = new Scanner(System.in);
             String employeeInput = scan.nextLine();
 
             switch(employeeInput){
-                case "2":
+                case "1":
                     wrs_confirm_presence();
                     break;
-                case "4":
+                case "2":
                     wrs_generate_report();
                     break;
-                case "5":
+                case "3":
                     wrs_leave_request();
                     break;
-                case "9":
+                case "4":
+                    if(Objects.equals(employee.getHierarchy_type(), "Kierownik")) {
+                        wrs_confirm_employee_presence();
+                    }
+                    else {
+                        System.out.println("Odmowa dostepu!");
+                    }
+                    break;
+                case "5":
                     if(Objects.equals(employee.getHierarchy_type(), "Kierownik")) {
                         wrs_process_leave_request();
                     }
@@ -73,7 +83,7 @@ public class Worktime_record_system {
                         System.out.println("Odmowa dostepu!");
                     }
                     break;
-                case "10":
+                case "6":
                     if(Objects.equals(employee.getHierarchy_type(), "Kierownik")) {
                         wrs_add_employee();
                     }
@@ -81,7 +91,9 @@ public class Worktime_record_system {
                         System.out.println("Odmowa dostepu!");
                     }
                     break;
-
+                case "7":
+                    System.exit(0);
+                    break;
             }
         }
     }
@@ -248,5 +260,13 @@ public class Worktime_record_system {
         }
         System.out.println("Wniosek rozpatrzony!");
     }
-    public static void wrs_confirm_employee_presence(){}
+    public static void wrs_confirm_employee_presence(){
+        Scanner scan = new Scanner(System.in);
+
+        Employee chosenEmployee = new Employee("", "");
+        chosenEmployee = wrs_choose_employee();
+
+        Presence empPresence = new Presence();
+        empPresence.create_subordinate_presence(chosenEmployee);
+    }
 }

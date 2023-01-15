@@ -5,6 +5,10 @@ import ewidencja.employee.Employee;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Presence implements iPresence, Serializable {
@@ -27,14 +31,22 @@ public class Presence implements iPresence, Serializable {
     public void create_presence(Employee employee){
         ObjectIO objectIO = new ObjectIO();
         if(check_if_present()){
-            setLeave_time();
+            try {
+                setLeave_time();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
             presenceFinished = true;
             System.out.println("Zaktualizowano obecnosc!\n");
         } else {
 
             setDay();
-            setArrival_time();
+            try {
+                setArrival_time();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             presence = true;
             employee.getReport().add_presence(this);
             objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
@@ -47,20 +59,85 @@ public class Presence implements iPresence, Serializable {
         return presence;
     }
 
-    public void setArrival_time() {
+    public void setArrival_time() throws ParseException {
         this.arrival_time = java.time.LocalTime.now().toString();
     }
 
-    public void setArrival_time(String arrival_time) {
-        this.arrival_time = arrival_time;
-    }
-
-    public void setLeave_time() {
+    public void setLeave_time() throws ParseException {
         this.leave_time = java.time.LocalTime.now().toString();
     }
 
-    public void setLeave_time(String leave_time) {
-        this.leave_time = leave_time;
+    public void managerSetTime(){
+        Scanner scan = new Scanner(System.in);
+        String input;
+
+        boolean formatOK = true;
+        do{
+            System.out.println("Podaj dzien: ");
+            input = scan.nextLine();
+            Date dateA = null;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                dateA = sdf.parse(input);
+                if (!input.equals(sdf.format(dateA))) {
+                    dateA = null;
+                }
+            } catch (ParseException ex) {
+            }
+            if (dateA == null){
+                formatOK = false;
+                System.out.println("Format wprowadzonych danych jest niepoprawny!");
+            }
+            else{
+                formatOK = true;
+                this.day = input;
+            }
+        }while(!formatOK);
+
+        do{
+            System.out.println("Podaj godzine rozpoczecia: ");
+            input = scan.nextLine();
+            Date dateA = null;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                dateA = sdf.parse(input);
+                if (!input.equals(sdf.format(dateA))) {
+                    dateA = null;
+                }
+            } catch (ParseException ex) {
+            }
+            if (dateA == null){
+                formatOK = false;
+                System.out.println("Format wprowadzonych danych jest niepoprawny!");
+            }
+            else{
+                formatOK = true;
+                this.arrival_time = input;
+            }
+        }while(!formatOK);
+
+        do{
+            System.out.println("Podaj godzine zakonczenia: ");
+            input = scan.nextLine();
+            Date dateA = null;
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+                dateA = sdf.parse(input);
+                if (!input.equals(sdf.format(dateA))) {
+                    dateA = null;
+                }
+            } catch (ParseException ex) {
+            }
+            if (dateA == null){
+                formatOK = false;
+                System.out.println("Format wprowadzonych danych jest niepoprawny!");
+            }
+            else{
+                formatOK = true;
+                this.leave_time = input;
+            }
+        }while(!formatOK);
+
     }
 
     public void setDay() {
@@ -69,13 +146,6 @@ public class Presence implements iPresence, Serializable {
 
     public void setId(int id){
         this.id = id;
-    }
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public void update_presence(){
-
     }
 
     public String getArrival_time() {
@@ -100,8 +170,13 @@ public class Presence implements iPresence, Serializable {
     public boolean getPresenceFinished() {
         return presenceFinished;
     }
-    public void create_subordinate_presence(){
-
+    public void create_subordinate_presence(Employee employee){
+        ObjectIO objectIO = new ObjectIO();
+        managerSetTime();
+        employee.getReport().add_presence(this);
+        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
+        presence = true;
+        presenceFinished = true;
     }
 
 }
