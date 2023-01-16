@@ -126,6 +126,7 @@ public class Worktime_record_system {
         wrs_set_start_end_date(absence);
         absence.create_absence(employee);
     }
+
     public static void wrs_set_start_end_date(Absence absence){
         long left_days;
         int userInput;
@@ -136,7 +137,7 @@ public class Worktime_record_system {
             String st = absence.getStart_date();
             String en = absence.getEnd_date();
 
-            left_days = wrs_left_vacation_days(st, en, absence);
+            left_days = wrs_left_vacation_days(st, en, absence);////////////
             userInput = employee.getSchedule().getLeft_vacation_days();
 
             if(userInput == 0){
@@ -144,14 +145,15 @@ public class Worktime_record_system {
                 return;
             }
 
-            if(left_days > userInput){
+            if(left_days < userInput){
                 System.out.println("Wprowadzony urlop nie moze zostac dodany, jego dlugosc jest wieksza niz liczba pozostalych" +
                         " dni urlopowych!");
             }
-        }while(left_days > userInput);
+        }while(left_days < userInput);
     }
+
     public static long wrs_left_vacation_days(String start, String end, Absence absence){
-        return absence.left_vacation_days(start, end);
+        return absence.left_vacation_days(start, end);/////////////////
     }
     public static void wrs_business_trip_request(){}
     public static void wrs_sick_leave_request(){}

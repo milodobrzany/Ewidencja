@@ -110,7 +110,6 @@ public abstract class Absence implements iAbsence, Serializable {
         SimpleDateFormat sdf
                 = new SimpleDateFormat(
                 "yyyy-MM-dd");
-
         try {
 
             Date d1 = sdf.parse(start);
@@ -120,16 +119,13 @@ public abstract class Absence implements iAbsence, Serializable {
                     = d2.getTime() - d1.getTime();
 
             long difference_In_Days
-                    = (difference_In_Time
-                    / (1000 * 60 * 60 * 24))
-                    % 365;
+                    = (difference_In_Time / (1000 * 60 * 60 * 24));
 
             return difference_In_Days;
         }
         catch (ParseException e) {
             e.printStackTrace();
         }
-
         return 1000000;
     }
     public int getId(){
