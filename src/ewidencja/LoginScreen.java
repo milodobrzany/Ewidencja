@@ -10,9 +10,13 @@ public class LoginScreen implements iLoginScreen{
     private String username;
     private String password;
 
-    public LoginScreen(){
-
+    public LoginScreen(String user, String pass){
+        username = user;
+        password = pass;
     }
+
+    public LoginScreen(){}
+
     @Override
     public void login(Manager manager){
         do{

@@ -231,7 +231,7 @@ public class Worktime_record_system {
         Employee chosenEmployee = new Employee("", "");
         chosenEmployee = wrs_choose_employee();
         chosenEmployee.getReport().generate_report();
-        System.out.println("Wybierz absencje: ");
+        System.out.println("Wybierz absencje (Id): ");
         String input = scan.nextLine();
 
         try{
