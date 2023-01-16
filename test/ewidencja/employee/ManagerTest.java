@@ -37,4 +37,22 @@ public class ManagerTest {
         // then
         assertNull(result);
     }
+
+    @Test
+    public void process_leave_requestTrue() { //mock - pracownik + raport + absencja(?)
+        // give
+        int input = 1;
+        // when
+
+        // then
+    }
+
+    @Test
+    public void process_leave_requestFalse() { //mock - pracownik + raport + absencja(?)
+        // give
+        int input = 0;
+        // when
+
+        // then
+    }
 }

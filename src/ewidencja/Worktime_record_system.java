@@ -227,7 +227,8 @@ public class Worktime_record_system {
         System.out.println("Dodano pracownika!");
     }
     public static void wrs_make_schedule(){}
-    public static void wrs_process_leave_request(){
+
+    public static void wrs_process_leave_request(){  ///////process_leave_request
         Scanner scan = new Scanner(System.in);
 
         Employee chosenEmployee = new Employee("", "");
@@ -245,23 +246,14 @@ public class Worktime_record_system {
 
             System.out.println("Zatwierdzic? (0- nie, 1- tak): ");
             input = scan.nextLine();
-
-            ObjectIO objectIO= new ObjectIO();
-
-            if(Objects.equals(input, "1")){
-                empAbsence.setIsConfirmed(true);
-                objectIO.WriteObjectToFile(chosenEmployee, chosenEmployee.getName(), chosenEmployee.getSurname());
-            }
-            else{
-                chosenEmployee.getReport().deleteAbsence(number);
-                objectIO.WriteObjectToFile(chosenEmployee, chosenEmployee.getName(), chosenEmployee.getSurname());
-            }
+            manager.process_leave_request(chosenEmployee, number, input); //dodane
         }
         catch (NumberFormatException ex){
             System.out.println("Niewlasciwy format danych");
         }
         System.out.println("Wniosek rozpatrzony!");
     }
+
     public static void wrs_confirm_employee_presence(){
         Scanner scan = new Scanner(System.in);
 

@@ -50,6 +50,7 @@ public class Employee implements Serializable {
     public void setHierarchy_type(String hierarchy_type) {
         this.hierarchy_type = hierarchy_type;
     }
+
     public String getName() {
         return name;
     }

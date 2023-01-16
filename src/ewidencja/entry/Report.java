@@ -60,6 +60,7 @@ public class Report implements Serializable {
     }
     public void deleteAbsence(int id){
         absences.remove(id - 1);
-        absenceCounter--;
+        absenceCounter--; //nie działa, jak usuwamy coś ze środka, usuwamy z tablicy ale nie zmieniamy id absencji
+                          // dodać zmienianie id absencji !!
     }
 }
