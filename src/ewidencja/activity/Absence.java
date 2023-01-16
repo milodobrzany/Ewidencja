@@ -25,6 +25,8 @@ public abstract class Absence implements iAbsence, Serializable {
     public void setIsConfirmed(boolean isConfirmed){
         this.isConfirmed = isConfirmed;
     }
+
+    public boolean getIsConfirmed() { return isConfirmed; }
     public void setStart_date(){
         boolean formatOK = true;
         String start;

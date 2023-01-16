@@ -220,7 +220,7 @@ public class Worktime_record_system {
 
         }while(!statement);
 
-        System.out.println("Wprowadz typ stanowiska- (Kierownik/Pracownik)");
+        System.out.println("Wprowadz typ stanowiska- (Kierownik/Pracownik)");  // nie ma kontroli wejscia
         input = scan.nextLine();
         addedEmployee.setHierarchy_type(input);
 

@@ -52,7 +52,7 @@ public class Manager implements iManager{
         }
     }
 
-    public boolean isGood(String text, String fieldType){
+    public boolean isGood(String text, String fieldType){ //dodac testy
         if(Objects.equals(fieldType, "username")) {
             for (Employee emp : employees) {
                 if (Objects.equals(emp.getUsername(), text))
