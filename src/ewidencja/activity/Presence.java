@@ -67,7 +67,7 @@ public class Presence implements iPresence, Serializable {
         this.leave_time = java.time.LocalTime.now().toString();
     }
 
-    public void managerSetTime(){
+    public void managerSetTime(){/////////////////////////////
         Scanner scan = new Scanner(System.in);
         String input;
 

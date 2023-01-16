@@ -1,18 +1,18 @@
 package ewidencja;
 
 import ewidencja.employee.Manager;
-import ewidencja.LoginScreen;
 import ewidencja.employee.Employee;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class LoginScreenTest {
+    private Manager manager;
 
     @Test
-    public void verify() {
-        // given
-        Manager manager = new Manager();
+    public void verifyCorrect() {
+        // give
+        manager = new Manager();
         LoginScreen login_screen = new LoginScreen("student", "Student123#");
 
         // when
@@ -22,5 +22,18 @@ public class LoginScreenTest {
 
         // then
         assertArrayEquals(expected, received);
+    }
+
+    @Test
+    public void verifyWrong() {
+        // give
+        manager = new Manager();
+        LoginScreen login_screen = new LoginScreen("student", "Student123");
+
+        // when
+        Employee result = login_screen.verify(manager);
+
+        // then
+        assertNull(result);
     }
 }
