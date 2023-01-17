@@ -139,12 +139,11 @@ public class Worktime_record_system {
                 System.out.println("Informacja nie zostala znaleziona w systemie lub brak dostępnych dni urlopowych");
                 return;
             }
-
-            if(left_days < userInput){
+            if(left_days > userInput){
                 System.out.println("Wprowadzony urlop nie moze zostac dodany, jego dlugosc jest wieksza niz liczba pozostalych" +
                         " dni urlopowych!");
             }
-        }while(left_days < userInput);
+        }while(left_days > userInput);
     }
 
     public static long wrs_left_vacation_days(String start, String end, Absence absence){
