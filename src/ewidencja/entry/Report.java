@@ -45,7 +45,7 @@ public class Report implements Serializable {
         presence.setId(presenceCounter);
         presenceCounter += 1;
     }
-    public void add_absence(Absence absence){
+    public void add_absence(Absence absence){ //testy
         absences.add(absence);
         absence.setId(absenceCounter);
         absenceCounter += 1;
@@ -59,8 +59,9 @@ public class Report implements Serializable {
         return null;
     }
     public void deleteAbsence(int id){
-        absences.remove(id - 1);
-        absenceCounter--; //nie działa, jak usuwamy coś ze środka, usuwamy z tablicy ale nie zmieniamy id absencji
-                          // dodać zmienianie id absencji !!
+        absences.remove(choose_absence(id));
+        absenceCounter--;
     }
+
+    public List<Absence> getAbsences() { return absences; }
 }

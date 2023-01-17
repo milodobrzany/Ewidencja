@@ -3,9 +3,7 @@ package ewidencja.activity;
 import ewidencja.employee.Employee;
 
 public class Sick_leave extends Absence{
-    public Sick_leave(){
-
-    }
+    public Sick_leave(){}
 
     @Override
     public void create_absence(Employee employee){

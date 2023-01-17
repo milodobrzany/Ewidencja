@@ -1,6 +1,5 @@
 package ewidencja.activity;
 
-import ewidencja.ObjectIO;
 import ewidencja.employee.Employee;
 
 import java.io.Serial;
@@ -90,11 +89,9 @@ public abstract class Absence implements iAbsence, Serializable {
         return end_date;
     }
 
-    public void create_absence(Employee employee){
+    public void create_absence(Employee employee){  //ew testy
         isConfirmed = false;
         employee.getReport().add_absence(this);
-        ObjectIO objectIO = new ObjectIO();
-        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
         System.out.println("Dodano Absencje!\n");
     }
     public boolean process_subordinate_absence(){return true;}

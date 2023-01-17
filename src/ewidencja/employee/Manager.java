@@ -28,27 +28,19 @@ public class Manager implements iManager{
     }
 
     @Override
-    public void remove_employee(){
-
-    }
+    public void remove_employee(){}
 
     @Override
-    public void set_personal_data(){
-
-    }
+    public void set_personal_data(){}
 
     @Override
-    public void process_leave_request(Employee chosenEmployee, int number, String input){
-        ObjectIO objectIO= new ObjectIO();
-
+    public void process_leave_request(Employee chosenEmployee, int number, String input){  //nie powinnismy wyswietlac obecnosci!!
         if(Objects.equals(input, "1")){
             Absence empAbsence = chosenEmployee.getReport().choose_absence(number);
             empAbsence.setIsConfirmed(true);
-            objectIO.WriteObjectToFile(chosenEmployee, chosenEmployee.getName(), chosenEmployee.getSurname());
         }
         else{
             chosenEmployee.getReport().deleteAbsence(number);
-            objectIO.WriteObjectToFile(chosenEmployee, chosenEmployee.getName(), chosenEmployee.getSurname());
         }
     }
 

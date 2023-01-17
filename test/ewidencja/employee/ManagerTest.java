@@ -1,9 +1,7 @@
 package ewidencja.employee;
 
-import ewidencja.LoginScreen;
 import ewidencja.activity.Absence;
 import ewidencja.activity.Leave;
-import ewidencja.employee.Manager;
 import ewidencja.entry.Report;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -13,7 +11,7 @@ import static org.junit.Assert.*;
 public class ManagerTest {
 
     @Test
-    public void choose_employeeCorrect() {
+    public void choose_employeeCorrect() {  //wybranie istniejacego pracownika
         // give
         Manager manager = new Manager();
         String name = "Lena";
@@ -29,7 +27,7 @@ public class ManagerTest {
     }
 
     @Test
-    public void choose_employeeWrong() {
+    public void choose_employeeWrong() {  //wybranie nieistniejacego pracownika
         // give
         Manager manager = new Manager();
         String name = "Lena";
@@ -43,7 +41,7 @@ public class ManagerTest {
     }
 
     @Test
-    public void process_leave_requestTrue() {  // zapis do objectIO zwraca błędy, ale tu testujemy coś innego
+    public void process_leave_requestTrue() {  //potwierdzenie wniosku
         // give
         Manager manager = new Manager();
         String input = "1";
@@ -63,7 +61,7 @@ public class ManagerTest {
     }
 
     @Test
-    public void process_leave_requestFalse() { //można dodać kolejny test: sprawdzanie usuwania dla więcej niż jednej absencji
+    public void process_leave_requestFalseOne() {  //sprawdzanie usuwania dla jednego wniosku
         // give
         Manager manager = new Manager();
         String input = "0";
@@ -80,5 +78,27 @@ public class ManagerTest {
 
         // then
         assertNull(result);
+    }
+
+    @Test
+    public void process_leave_requestFalseMany() {  //sprawdzanie usuwania dla więcej niż jednego wniosku
+        // give
+        Manager manager = new Manager();
+        String input = "0";
+        Employee employee = Mockito.mock(Employee.class);
+        Report report = new Report();
+        for (int i=0;i<3;i++) {
+            Absence absence = new Leave();
+            report.add_absence(absence);
+        }
+
+        // when
+        Mockito.when(employee.getReport()).thenReturn(report);
+        for (int i=1;i<4;i++) {
+            manager.process_leave_request(employee, i, input);
+        }
+
+        // then
+        assertEquals(0, report.getAbsences().size()); //report.absences
     }
 }

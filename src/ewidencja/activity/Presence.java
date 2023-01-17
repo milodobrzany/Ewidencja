@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Presence implements iPresence, Serializable {
@@ -29,18 +28,15 @@ public class Presence implements iPresence, Serializable {
 
     @Override
     public void create_presence(Employee employee){
-        ObjectIO objectIO = new ObjectIO();
         if(check_if_present()){
             try {
                 setLeave_time();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
             presenceFinished = true;
             System.out.println("Zaktualizowano obecnosc!\n");
         } else {
-
             setDay();
             try {
                 setArrival_time();
@@ -49,15 +45,15 @@ public class Presence implements iPresence, Serializable {
             }
             presence = true;
             employee.getReport().add_presence(this);
-            objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
             System.out.println("Dodano obecnosc!\n");
         }
     }
 
-
     private boolean check_if_present(){
         return presence;
     }
+
+    public void set_presence(boolean isPresent) { presence = isPresent; }
 
     public void setArrival_time() throws ParseException {
         this.arrival_time = java.time.LocalTime.now().toString();
@@ -170,7 +166,7 @@ public class Presence implements iPresence, Serializable {
     public boolean getPresenceFinished() {
         return presenceFinished;
     }
-    public void create_subordinate_presence(Employee employee){
+    public void create_subordinate_presence(Employee employee){ //ew testy
         ObjectIO objectIO = new ObjectIO();
         managerSetTime();
         employee.getReport().add_presence(this);
@@ -178,5 +174,4 @@ public class Presence implements iPresence, Serializable {
         presence = true;
         presenceFinished = true;
     }
-
 }

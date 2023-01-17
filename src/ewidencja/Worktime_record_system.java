@@ -4,15 +4,9 @@ import ewidencja.activity.Absence;
 import ewidencja.activity.Leave;
 import ewidencja.activity.Presence;
 import ewidencja.employee.Employee;
-
-import java.text.ParseException;
 import java.util.Objects;
 import java.util.Scanner;
-import ewidencja.ObjectIO;
 import ewidencja.employee.Manager;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Worktime_record_system {
     private static Employee employee;
@@ -106,12 +100,11 @@ public class Worktime_record_system {
     }
 
     public static void wrs_confirm_presence(){
-        if(!presence.getPresenceFinished())
-            presence.create_presence(employee);
-        else{
+        ObjectIO objectIO = new ObjectIO();
+        if(presence.getPresenceFinished())
             presence = new Presence();
-            presence.create_presence(employee);
-        }
+        presence.create_presence(employee);
+        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
     }
 
     public static void wrs_show_schedule(){}
@@ -125,6 +118,8 @@ public class Worktime_record_system {
         Absence absence = new Leave();
         wrs_set_start_end_date(absence);
         absence.create_absence(employee);
+        ObjectIO objectIO = new ObjectIO();
+        objectIO.WriteObjectToFile(employee, employee.getName(), employee.getSurname());
     }
 
     public static void wrs_set_start_end_date(Absence absence){
@@ -137,7 +132,7 @@ public class Worktime_record_system {
             String st = absence.getStart_date();
             String en = absence.getEnd_date();
 
-            left_days = wrs_left_vacation_days(st, en, absence);////////////
+            left_days = wrs_left_vacation_days(st, en, absence);
             userInput = employee.getSchedule().getLeft_vacation_days();
 
             if(userInput == 0){
@@ -153,7 +148,7 @@ public class Worktime_record_system {
     }
 
     public static long wrs_left_vacation_days(String start, String end, Absence absence){
-        return absence.left_vacation_days(start, end);/////////////////
+        return absence.left_vacation_days(start, end);
     }
     public static void wrs_business_trip_request(){}
     public static void wrs_sick_leave_request(){}
@@ -228,8 +223,9 @@ public class Worktime_record_system {
     }
     public static void wrs_make_schedule(){}
 
-    public static void wrs_process_leave_request(){  ///////process_leave_request
+    public static void wrs_process_leave_request(){
         Scanner scan = new Scanner(System.in);
+        ObjectIO objectIO= new ObjectIO();
 
         Employee chosenEmployee = new Employee("", "");
         chosenEmployee = wrs_choose_employee();
@@ -246,7 +242,9 @@ public class Worktime_record_system {
 
             System.out.println("Zatwierdzic? (0- nie, 1- tak): ");
             input = scan.nextLine();
-            manager.process_leave_request(chosenEmployee, number, input); //dodane
+            manager.process_leave_request(chosenEmployee, number, input);
+            objectIO.WriteObjectToFile(chosenEmployee, chosenEmployee.getName(), chosenEmployee.getSurname());
+
         }
         catch (NumberFormatException ex){
             System.out.println("Niewlasciwy format danych");

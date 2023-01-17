@@ -10,7 +10,7 @@ public class LoginScreenTest {
     private Manager manager;
 
     @Test
-    public void verifyCorrect() {
+    public void verifyCorrect() {  //prawidlowe haslo
         // give
         manager = new Manager();
         LoginScreen login_screen = new LoginScreen("student", "Student123#");
@@ -25,7 +25,7 @@ public class LoginScreenTest {
     }
 
     @Test
-    public void verifyWrong() {
+    public void verifyWrong() {  //nieprawidlowe haslo
         // give
         manager = new Manager();
         LoginScreen login_screen = new LoginScreen("student", "Student123");

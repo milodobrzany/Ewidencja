@@ -64,9 +64,11 @@ public class ObjectIO {
     }
 
     public void listFilesForFolder(List<Employee> employees) {
-        for (File fileEntry : filesList) {
+        for (File fileEntry : get_filesList()) {
             Employee employee = (Employee) this.ReadObjectFromFile(fileEntry);
             employees.add(employee);
         }
     }
+
+    public File[] get_filesList() { return filesList; }
 }
