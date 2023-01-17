@@ -59,8 +59,14 @@ public class Report implements Serializable {
         return null;
     }
     public void deleteAbsence(int id){
+        int incr = 0;
+        for(Absence abs: absences){
+            if(incr > (id - 1)){
+                abs.setId(abs.getId() - 1);
+            }
+            incr ++;
+        }
         absences.remove(id - 1);
-        absenceCounter--; //nie działa, jak usuwamy coś ze środka, usuwamy z tablicy ale nie zmieniamy id absencji
-                          // dodać zmienianie id absencji !!
+        absenceCounter--;
     }
 }
